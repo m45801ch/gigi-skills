@@ -1,4 +1,4 @@
-# sync-skills.ps1 — 同步技能包到 gigi-skills repo 並推送
+﻿# sync-skills.ps1 — 同步技能包到 gigi-skills repo 並推送
 # 用法:  powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1
 # 可加 -Commit "說明文字" 自訂 commit message，預設自動產生
 
@@ -9,6 +9,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 $env:CODEGRAPH_AGENTS = ""
+
+# 設定主控台為 UTF-8，避免中文亂碼
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
+try { chcp 65001 | Out-Null } catch {}
 
 $agentsSkills = Join-Path $env:USERPROFILE ".agents\skills"
 $antigravitySdk = Join-Path $env:USERPROFILE ".gemini\config\plugins\google-antigravity-sdk\SKILL.md"
