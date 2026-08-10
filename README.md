@@ -8,6 +8,7 @@
 |---|---|---|
 | `agents-skills/` | `~/.agents/skills/` | 共用技能（gstack、baoyu、ckm、superpowers 等，opencode/Claude Code/Cursor 通用） |
 | `antigravity/google-antigravity-sdk/` | `~/.gemini/config/plugins/google-antigravity-sdk/` | Google Antigravity SDK 技能 |
+| `opencode-config/` | `~/.config/opencode/` | opencode 設定（opencode.jsonc、AGENTS.md、package.json） |
 
 ## 同步到新電腦
 
@@ -24,8 +25,15 @@ powershell -ExecutionPolicy Bypass -File .\install-skills.ps1
 它會自動：
 - 安裝 `agents-skills/` → `~/.agents/skills`（opencode / Claude Code / Cursor 共用）
 - 安裝 Antigravity SDK → `~/.gemini/config/plugins/google-antigravity-sdk/`
+- 安裝 opencode 設定 → `~/.config/opencode/`（opencode.jsonc、AGENTS.md、package.json）
 
 安裝後**重啟你的 AI 工具**即生效。
+
+> 若不想覆蓋本機現有的 opencode 設定，可加 `-SkipOpenCode` 跳過該步驟。
+
+**opencode 設定的注意事項**：
+- `package.json` 讓 opencode 啟動時自動安裝 superpowers plugin
+- `opencode.jsonc` 內的 codegraph MCP server 需要先安裝 CLI：`npm i -g @colbymchenry/codegraph`，否則 MCP 不會連線
 
 ### 手動安裝（不跑腳本時）
 
