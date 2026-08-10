@@ -31,6 +31,15 @@ powershell -ExecutionPolicy Bypass -File .\install-skills.ps1
 
 > 若不想覆蓋本機現有的 opencode 設定，可加 `-SkipOpenCode` 跳過該步驟。
 
+**兩種安裝方式**：
+
+| 需求 | 指令 |
+|---|---|
+| 完整安裝（含覆蓋 opencode 設定） | `powershell -ExecutionPolicy Bypass -File .\install-skills.ps1` |
+| 保留本機 opencode 設定 | `powershell -ExecutionPolicy Bypass -File .\install-skills-noconflict.ps1` |
+
+`install-skills-noconflict.ps1` 等同 `install-skills.ps1 -SkipOpenCode`，只安裝技能 + Antigravity SDK，不碰 `~/.config/opencode`。
+
 **opencode 設定的注意事項**：
 - `package.json` 讓 opencode 啟動時自動安裝 superpowers plugin
 - `opencode.jsonc` 內的 codegraph MCP server 需要先安裝 CLI：`npm i -g @colbymchenry/codegraph`，否則 MCP 不會連線
