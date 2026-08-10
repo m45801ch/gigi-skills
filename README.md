@@ -27,6 +27,20 @@ mkdir -p ~/.gemini/config/plugins/google-antigravity-sdk
 cp skills-backup/antigravity/google-antigravity-sdk/SKILL.md ~/.gemini/config/plugins/google-antigravity-sdk/
 ```
 
+## 自動同步（本機 A）
+
+`sync-skills.ps1` 會把本機最新的技能同步回 repo 並推送：
+
+```powershell
+# 一般同步（自動產生 commit message）
+powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1
+
+# 自訂 commit 說明
+powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1 -Commit "新增某技能"
+```
+
+做的事：同步 `~/.agents/skills` → `agents-skills/`、同步 Antigravity SDK、git add/commit、push。無變更時自動跳過。
+
 ## 敏感檔案
 
 `.env`、API key、憑證等已由 `.gitignore` 排除，**不會**提交。新電腦需手動重新設定（如 anysearch 的 `ANYSEARCH_API_KEY`）。
