@@ -43,8 +43,10 @@ try {
     Write-Host ""
     Write-Host "=== 無變更，結束 ===" -ForegroundColor Green
     Write-Host ""
-    Write-Host "按任意鍵關閉視窗..." -ForegroundColor DarkGray
-    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    if ([Environment]::UserInteractive) {
+      Write-Host "按任意鍵關閉視窗..." -ForegroundColor DarkGray
+      $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    }
     exit 0
   }
 
@@ -69,5 +71,7 @@ try {
 
 Write-Host "=== 同步完成 ===" -ForegroundColor Green
 Write-Host ""
-Write-Host "按任意鍵關閉視窗..." -ForegroundColor DarkGray
-$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+if ([Environment]::UserInteractive) {
+  Write-Host "按任意鍵關閉視窗..." -ForegroundColor DarkGray
+  $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+}
