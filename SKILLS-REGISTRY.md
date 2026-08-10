@@ -95,9 +95,13 @@
 - **安裝**: `npx skills add https://github.com/vercel-labs/skills --skill find-skills`
 - **注意**: 此技能為 skills.sh 生態的安裝助手，本身即用於安裝其他技能
 
-### 10. grill-me（1 個技能，極簡版）
-- **來源**: 無明確上游（本機為自訂極簡 wrapper，內容為 `Run a /grilling session`）
-- **安裝**: 直接複製 `~/.agents/skills/grill-me/` 目錄
+### 10. grill-me + grill-with-docs（2 個技能，mattpocock/skills）
+- **來源**: `https://github.com/mattpocock/skills`
+- **路徑**:
+  - grill-me: `skills/productivity/grill-me`
+  - grill-with-docs: `skills/engineering/grill-with-docs`
+- **安裝**: 從 repo 對應路徑複製目錄到 `~/.agents/skills/`
+- **說明**: `grill-with-docs` 是 `grill-me` 的進化版，除了反覆質問打磨方案外，還會同步建立 ADR（Architecture Decision Records）與 glossary
 
 ## 一鍵安裝指令（agent 可用）
 
@@ -106,7 +110,8 @@
 git clone https://github.com/JimLiu/baoyu-skills.git          # baoyu + release-skills
 git clone --depth 1 https://github.com/garrytan/gstack.git     # gstack 套件
 git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git  # ui-ux-pro-max + ckm
-git clone https://github.com/anysearch-ai/anysearch-skill.git  # anysearch
+git clone https://github.com/anysearch-ai/anysearch-skill.git          # anysearch
+git clone https://github.com/mattpocock/skills.git                     # grill-me + grill-with-docs
 
 # 透過 skills CLI
 npx skills add https://github.com/anthropics/skills --skill frontend-design --skill skill-creator
