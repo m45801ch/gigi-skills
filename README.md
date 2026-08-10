@@ -68,7 +68,18 @@ powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1
 powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1 -Commit "新增某技能"
 ```
 
-做的事：同步 `~/.agents/skills` → `agents-skills/`、同步 Antigravity SDK、git add/commit、push。無變更時自動跳過。
+### 安全同步流程（先整合、後上傳）
+
+為了避免 B 電腦上傳時覆蓋 A 電腦已上傳的技能，腳本採「先下載整合、再上傳」的流程：
+
+1. 同步本機技能 → `agents-skills/`
+2. 在**本地**建立 commit（尚未上傳）
+3. `git pull --rebase`：先下載遠端最新變更，把本地 commit 疊在遠端之上
+4. 才執行 `git push`
+
+如此一來，若其他電腦有更新，會先整合進來（保留雙方變更），不會直接覆蓋。若發生衝突，腳本會**停止並提示手動解決**，不會盲目上傳覆蓋。
+
+無本機變更時，仍會執行 pull 取得遠端最新內容，只是跳過 commit。
 
 ## 敏感檔案
 
