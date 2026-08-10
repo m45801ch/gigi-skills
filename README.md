@@ -11,20 +11,49 @@
 
 ## 同步到新電腦
 
-```bash
-git clone <repo-url> skills-backup
+### 一次性的安裝（repo → 本機）
+
+Clone 後用 `install-skills.ps1` 把技能裝到新電腦：
+
+```powershell
+git clone https://github.com/m45801ch/gigi-skills.git
+cd gigi-skills
+powershell -ExecutionPolicy Bypass -File .\install-skills.ps1
 ```
 
-### opencode / 共用 agent
+它會自動：
+- 安裝 `agents-skills/` → `~/.agents/skills`（opencode / Claude Code / Cursor 共用）
+- 安裝 Antigravity SDK → `~/.gemini/config/plugins/google-antigravity-sdk/`
+
+安裝後**重啟你的 AI 工具**即生效。
+
+### 手動安裝（不跑腳本時）
+
 ```bash
-# 用 robocopy 複製到共用技能目錄（Windows）
 robocopy "skills-backup\agents-skills" "%USERPROFILE%\.agents\skills" /E
+robocopy "skills-backup\antigravity\google-antigravity-sdk" "%USERPROFILE%\.gemini\config\plugins\google-antigravity-sdk" /E
 ```
 
-### Antigravity (Gemini CLI)
-```bash
-mkdir -p ~/.gemini/config/plugins/google-antigravity-sdk
-cp skills-backup/antigravity/google-antigravity-sdk/SKILL.md ~/.gemini/config/plugins/google-antigravity-sdk/
+## 兩台電腦的使用流程
+
+> 腳本自動偵測所在資料夾位置（`$PSScriptRoot`），Clone 到哪都能用。
+
+**A 電腦（主機，有更新技能時）**
+```powershell
+powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1
+# 把 A 的技能推送回 GitHub repo
+```
+
+**B 電腦（新機，要取得最新技能時）**
+```powershell
+git pull                    # 先拉最新
+powershell -ExecutionPolicy Bypass -File .\install-skills.ps1   # 安裝到本機
+```
+
+**B 電腦（想把自己的技能也上傳時）**
+```powershell
+powershell -ExecutionPolicy Bypass -File .\sync-skills.ps1
+# 注意：這會把 B 本機的技能覆蓋 repo 內容並推送（含 B 的修改）
 ```
 
 ## 自動同步（本機 A）

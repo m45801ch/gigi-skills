@@ -3,7 +3,7 @@
 # 可加 -Commit "說明文字" 自訂 commit message，預設自動產生
 
 param(
-  [string]$Repo = "C:\Users\GIGI\skills-backup",
+  [string]$Repo = $PSScriptRoot,
   [string]$Commit = ""
 )
 
