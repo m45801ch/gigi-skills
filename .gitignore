@@ -1,0 +1,12 @@
+# 敏感檔案 — 永不提交
+.env
+.env.*
+*.key
+*.pem
+*credential*
+*secret*
+*token*
+
+# 系統/工具
+.DS_Store
+Thumbs.db
